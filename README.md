@@ -1,2 +1,2 @@
-# contact-us-widget
-A contact us widget built using Saasufy.
+# chat-app
+A chat app built with Saasufy.

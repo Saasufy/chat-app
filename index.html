@@ -11,21 +11,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <script src="https://saasufy.com/node_modules/saasufy-components/socket.js" type="module" defer></script>
     <script src="https://saasufy.com/node_modules/saasufy-components/app-router.js" type="module" defer></script>
+    <script src="https://saasufy.com/node_modules/saasufy-components/log-in-form.js" type="module" defer></script>
   </head>
   <body>
     <div class="main-container">
-      <socket-provider class="main-socket-container" url="wss://saasufy.com/sid8001/socketcluster/">
 
-        <app-router class="product-container centered-column-container">
-          <template slot="page" route-path="/log-in">
-            
+      <socket-provider class="main-socket-container" url="wss://saasufy.com/sid8001/socketcluster/">
+        <app-router class="product-container centered-column-container" default-page="/chat">
+          <template slot="page" route-path="/log-in" auth-redirect="/chat" hard-redirect>
+            <log-in-form
+              hostname="sas.saasufy.com"
+              port="443"
+              network-symbol="sas"
+              chain-module-name="sas_chain"
+              secure="true"
+            ></log-in-form>
           </template>
-          <template slot="page" route-path="/chat">
-            
+          <template slot="page" route-path="/chat" no-auth-redirect="/log-in">
+            This is a chat
           </template>
           <div slot="viewport" class="main-viewport"></div>
         </app-router>
-
       </socket-provider>
 
     </div>

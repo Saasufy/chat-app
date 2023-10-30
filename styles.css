@@ -31,7 +31,7 @@ a {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 500px;
+  max-width: 1000px;
   gap: 20px;
 }
 
@@ -41,11 +41,70 @@ a {
   justify-content: space-between;
   align-items: stretch;
   width: 100%;
-  max-width: 500px;
+  max-width: 1000px;
   gap: 20px;
+}
+
+input[type=text],input[type=password],input[type=number],select,textarea {
+  border: 1px solid #999999;
+  border-radius: 5px;
+  min-width: 50px;
+}
+
+input[type=text]:focus,input[type=password]:focus,input[type=number]:focus,select:focus,textarea:focus {
+  border-color: #00a5e5;
+  outline-color: #00a5e5;
+}
+
+input[type=text].error:focus,input[type=password].error:focus,input[type=number].error:focus,select.error:focus,textarea.error:focus {
+  border-color: #ff0000;
+  outline-color: #ff0000;
+}
+
+input[type=text].warning:focus,input[type=password].warning:focus,input[type=number].warning:focus,select.warning:focus,textarea.warning:focus {
+  border-color: #ee9900;
+  outline-color: #ee9900;
+}
+
+input[type=text].success:focus,input[type=password].success:focus,input[type=number].success:focus,select.success:focus,textarea.success:focus {
+  border-color: #009900;
+  outline-color: #009900;
 }
 
 input[type=text],input[type=password],input[type=button],input[type=submit],input[type=number],textarea {
   padding: 10px;
   font-size: 18px;
+  max-width: 400px;
+}
+
+input[type=checkbox] {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+}
+
+.passphrase-container input {
+  max-width: 130px;
+}
+
+.log-in-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.passphrase-container {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+capitalisk-passphrase-input {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.log-in-form .form-panel label,.log-in-form .form-panel input[type=checkbox],.multisig-indicator {
+  vertical-align: middle;
 }

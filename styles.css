@@ -166,3 +166,12 @@ input[type=submit] {
 input[type=submit]:not(input[disabled]) {
   cursor: pointer;
 }
+
+@media (max-width: 550px) {
+  .chat-username {
+    font-size: 13px;
+  }
+  .chat-created-at {
+    font-size: 13px;
+  }
+}

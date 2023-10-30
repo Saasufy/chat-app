@@ -133,12 +133,12 @@ capitalisk-passphrase-input {
   padding: 10px;
 }
 
-.chat-username {
+.chat-wallet-address {
   display: flex;
   justify-content: flex-end;
 }
 
-.username-self {
+.wallet-address-self {
   color: #009900;
 }
 
@@ -168,7 +168,7 @@ input[type=submit]:not(input[disabled]) {
 }
 
 @media (max-width: 550px) {
-  .chat-username {
+  .chat-wallet-address {
     font-size: 13px;
   }
   .chat-created-at {

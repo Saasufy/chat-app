@@ -36,15 +36,15 @@
             <collection-browser
               class="chat-browser"
               collection-type="Chat"
-              collection-fields="username,message,createdAt"
+              collection-fields="walletAddress,message,createdAt"
               collection-view="recentView"
               collection-page-size="50"
               collection-view-params=""
             >
               <template slot="item">
                 <div class="chat-message-container">
-                  <div class="chat-username">
-                    <b class="{{socket.authToken.walletAddress === Chat.username ? 'username-self' : 'username-other'}}">{{Chat.username}}</b>
+                  <div class="chat-wallet-address">
+                    <b class="{{socket.authToken.walletAddress === Chat.walletAddress ? 'wallet-address-self' : 'wallet-address-other'}}">{{Chat.walletAddress}}</b>
                   </div>
                   <div class="chat-message">{{Chat.message}}</div>
                   <div class="chat-created-at">{{date(Chat.createdAt)}}</div>
@@ -57,7 +57,7 @@
               class="chat-adder-form"
               collection-type="Chat"
               collection-fields="message:textarea"
-              model-values="username={{socket.authToken.walletAddress}}"
+              model-values="walletAddress={{socket.authToken.walletAddress}}"
               submit-button-label="Send"
             ></collection-adder>
 

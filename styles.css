@@ -77,6 +77,10 @@ input[type=text],input[type=password],input[type=button],input[type=submit],inpu
   max-width: 400px;
 }
 
+input.long-input {
+  max-width: 500px;
+}
+
 input[type=checkbox] {
   width: 20px;
   height: 20px;

@@ -41,7 +41,7 @@ a {
   justify-content: space-between;
   align-items: stretch;
   width: 100%;
-  max-width: 1000px;
+  max-width: 800px;
   gap: 20px;
 }
 
@@ -107,4 +107,58 @@ capitalisk-passphrase-input {
 
 .log-in-form .form-panel label,.log-in-form .form-panel input[type=checkbox],.multisig-indicator {
   vertical-align: middle;
+}
+
+.chat-viewport {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 15px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  height: 450px;
+  overflow-y: scroll;
+  padding-right: 20px;
+}
+
+.chat-message-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.chat-username {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.username-self {
+  color: #009900;
+}
+
+.chat-created-at {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.chat-adder-form .collection-adder-form-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chat-adder-form textarea {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  max-width: 250px;
+}
+
+input[type=submit]:not(input[disabled]) {
+  cursor: pointer;
 }

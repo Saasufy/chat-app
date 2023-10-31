@@ -20,7 +20,9 @@
       <socket-provider class="main-socket-container" url="wss://saasufy.com/sid8001/socketcluster/">
         <app-router class="product-container centered-column-container" default-page="/chat">
 
-          <template slot="page" route-path="/log-in" auth-redirect="/chat" hard-redirect>
+          <template slot="page" route-path="/log-in" auth-redirect="/chat" no-auth-redirect="/log-in/sas" hard-redirect></template>
+
+          <template slot="page" route-path="/log-in/sas" auth-redirect="/chat" hard-redirect>
             <log-in-form
               hostname="sas.saasufy.com"
               port="443"
@@ -28,9 +30,25 @@
               chain-module-name="sas_chain"
               secure="true"
             ></log-in-form>
+            <p>
+              <a href="#/log-in/clsk">Log in via CLSK instead.</a>
+            </p>
           </template>
 
-          <template slot="page" route-path="/chat" no-auth-redirect="/log-in">
+          <template slot="page" route-path="/log-in/clsk" auth-redirect="/chat" hard-redirect>
+            <log-in-form
+              hostname="capitalisk.com"
+              port="443"
+              network-symbol="clsk"
+              chain-module-name="capitalisk_chain"
+              secure="true"
+            ></log-in-form>
+            <p>
+              <a href="#/log-in/sas">Log in via SAS instead.</a>
+            </p>
+          </template>
+
+          <template slot="page" route-path="/chat" no-auth-redirect="/log-in/sas">
             <h1>Saasufy Chat</h1>
 
             <collection-browser

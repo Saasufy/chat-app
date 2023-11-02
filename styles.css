@@ -113,6 +113,36 @@ capitalisk-passphrase-input {
   vertical-align: middle;
 }
 
+.multisig-indicator.spinning {
+  display: inline-block;
+}
+
+.spinning {
+  animation: spin 1s infinite linear;
+}
+
+.loading-spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 450px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  color: #cccccc;
+  font-size: 70px;
+  box-sizing: border-box;
+}
+
+.multisig-indicator.error {
+  color: #ff0000;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .chat-viewport {
   display: flex;
   flex-direction: column-reverse;
@@ -122,6 +152,7 @@ capitalisk-passphrase-input {
   height: 450px;
   overflow-y: scroll;
   padding-right: 20px;
+  box-sizing: border-box;
 }
 
 .chat-message-container {
@@ -165,6 +196,12 @@ input[type=submit] {
 
 input[type=submit]:not(input[disabled]) {
   cursor: pointer;
+}
+
+.chat-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 @media (max-width: 550px) {

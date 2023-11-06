@@ -15,6 +15,8 @@
     <script src="https://saasufy.com/node_modules/saasufy-components/collection-browser.js" type="module" defer></script>
     <script src="https://saasufy.com/node_modules/saasufy-components/collection-adder.js" type="module" defer></script>
     <script src="https://saasufy.com/node_modules/saasufy-components/log-out.js" type="module" defer></script>
+    <script src="https://saasufy.com/node_modules/saasufy-components/oauth-link.js" type="module" defer></script>
+    <script src="https://saasufy.com/node_modules/saasufy-components/oauth-handler.js" type="module" defer></script>
   </head>
   <body>
     <div class="main-container">
@@ -34,6 +36,14 @@
             <p>
               <a href="#/log-in/clsk">Log in via CLSK instead.</a>
             </p>
+            <oauth-link class="log-in-oauth-section" provider="github" client-id="dabb51f8af31a0bc53bf">
+              <template slot="item">
+                <a href="https://github.com/login/oauth/authorize?client_id={{oauth.clientId}}&state={{oauth.state}}">
+                  Log in with GitHub
+                </a>
+              </template>
+              <div slot="viewport"></div>
+            </oauth-link>
           </template>
 
           <template slot="page" route-path="/log-in/clsk" auth-redirect="/chat" hard-redirect>
@@ -47,6 +57,18 @@
             <p>
               <a href="#/log-in/sas">Log in via SAS instead.</a>
             </p>
+            <oauth-link class="log-in-oauth-section" provider="github" client-id="dabb51f8af31a0bc53bf">
+              <template slot="item">
+                <a href="https://github.com/login/oauth/authorize?client_id={{oauth.clientId}}&state={{oauth.state}}">
+                  Log in with GitHub
+                </a>
+              </template>
+              <div slot="viewport"></div>
+            </oauth-link>
+          </template>
+
+          <template slot="page" route-path="/oauth">
+            <oauth-handler provider="github" success-location-hash="/chat"></oauth-handler>
           </template>
 
           <template slot="page" route-path="/chat" no-auth-redirect="/log-in/sas">
@@ -58,7 +80,7 @@
             <collection-browser
               class="chat-browser"
               collection-type="Chat"
-              collection-fields="walletAddress,message,createdAt"
+              collection-fields="username,message,createdAt"
               collection-view="recentView"
               collection-page-size="50"
               collection-view-params=""
@@ -66,7 +88,7 @@
               <template slot="item">
                 <div class="chat-message-container">
                   <div class="chat-wallet-address">
-                    <b class="{{socket.authToken.walletAddress === Chat.walletAddress ? 'wallet-address-self' : 'wallet-address-other'}}">{{Chat.walletAddress}}</b>
+                    <b class="{{socket.authToken.username === Chat.username ? 'wallet-address-self' : 'wallet-address-other'}}">{{Chat.username}}</b>
                   </div>
                   <div class="chat-message">{{Chat.message}}</div>
                   <div class="chat-created-at">{{date(Chat.createdAt)}}</div>
@@ -82,7 +104,7 @@
               class="chat-adder-form"
               collection-type="Chat"
               collection-fields="message:textarea"
-              model-values="walletAddress={{socket.authToken.walletAddress}}"
+              model-values="username={{socket.authToken.username}}"
               submit-button-label="Send"
             ></collection-adder>
 

@@ -94,10 +94,13 @@
                   <div class="chat-created-at">{{date(Chat.createdAt)}}</div>
                 </div>
               </template>
+              <template slot="loader">
+                <div class="loading-spinner-container">
+                  <div class="spinning">&#8635;</div>
+                </div>
+              </template>
               <div slot="viewport" class="chat-viewport"></div>
-              <div slot="loader" class="loading-spinner-container">
-                <div class="spinning">&#8635;</div>
-              </div>
+
             </collection-browser>
 
             <collection-adder

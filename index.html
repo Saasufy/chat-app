@@ -14,6 +14,7 @@
     <script src="https://saasufy.com/node_modules/saasufy-components/log-in-form.js" type="module" defer></script>
     <script src="https://saasufy.com/node_modules/saasufy-components/collection-browser.js" type="module" defer></script>
     <script src="https://saasufy.com/node_modules/saasufy-components/collection-adder.js" type="module" defer></script>
+    <script src="https://saasufy.com/node_modules/saasufy-components/switch-group.js" type="module" defer></script>
     <script src="https://saasufy.com/node_modules/saasufy-components/log-out.js" type="module" defer></script>
     <script src="https://saasufy.com/node_modules/saasufy-components/oauth-link.js" type="module" defer></script>
     <script src="https://saasufy.com/node_modules/saasufy-components/oauth-handler.js" type="module" defer></script>
@@ -73,13 +74,13 @@
 
           <template slot="page" route-path="/chat" no-auth-redirect="/log-in/sas">
             <div class="chat-top-row">
-              <h1>Saasufy Chat</h1>
-              <log-out onclick="logOut()"><a href="javascript:void(0)">Log out</a></log-out>
+              <h1 class="sm-full-width-line">Saasufy General Chat</h1>
+              <log-out onclick="logOut()"><a class="limited-width-container small-padded-container" href="javascript:void(0)">Log out</a></log-out>
             </div>
 
             <collection-browser
               class="chat-browser"
-              collection-type="Chat"
+              collection-type="PublicChat"
               collection-fields="username,message,createdAt"
               collection-view="recentView"
               collection-page-size="50"
@@ -87,11 +88,23 @@
             >
               <template slot="item">
                 <div class="chat-message-container">
-                  <div class="chat-wallet-address">
-                    <b class="{{socket.authToken.username === Chat.username ? 'wallet-address-self' : 'wallet-address-other'}}">{{Chat.username}}</b>
+                  <div class="chat-username">
+
+                    <switch-group show-cases="self={{socket.authToken.username === PublicChat.username}},other={{socket.authToken.username !== PublicChat.username}}">
+                      <template slot="content" name="self">
+                        <b class="username-self">{{PublicChat.username}}</b>
+                      </template>
+                      <template slot="content" name="other">
+                        <a href="#/chat/{{PublicChat.username}}">
+                          <b class="username-other">{{PublicChat.username}}</b>
+                        </a>
+                      </template>
+                      <div slot="viewport"></div>
+                    </switch-group>
+
                   </div>
-                  <div class="chat-message">{{Chat.message}}</div>
-                  <div class="chat-created-at">{{date(Chat.createdAt)}}</div>
+                  <div class="chat-message">{{PublicChat.message}}</div>
+                  <div class="chat-created-at">{{date(PublicChat.createdAt)}}</div>
                 </div>
               </template>
               <template slot="loader">
@@ -105,9 +118,61 @@
 
             <collection-adder
               class="chat-adder-form"
-              collection-type="Chat"
+              collection-type="PublicChat"
               collection-fields="message:textarea"
               model-values="username={{socket.authToken.username}}"
+              submit-button-label="Send"
+            ></collection-adder>
+          </template>
+
+          <template slot="page" route-path="/chat/:username" no-auth-redirect="/log-in/sas">
+            <div class="chat-top-row">
+              <h1 class="sm-full-width-line">Saasufy <div class="medium-line-container limited-width-container">{{username}}</div>Chat</h1>
+              <a class="limited-width-container small-padded-container" href="#/chat">General Chat</a>
+              <log-out onclick="logOut()"><a class="limited-width-container small-padded-container" href="javascript:void(0)">Log out</a></log-out>
+            </div>
+
+            <collection-browser
+              class="chat-browser"
+              collection-type="PrivateChat"
+              collection-fields="username,message,createdAt"
+              collection-view="recentView"
+              collection-page-size="50"
+              collection-view-params="participants='{{[socket.authToken.username, username].sort().join(',')}}'"
+            >
+              <template slot="item">
+                <div class="chat-message-container">
+                  <div class="chat-username">
+
+                    <switch-group show-cases="self={{socket.authToken.username === PrivateChat.username}},other={{socket.authToken.username !== PrivateChat.username}}">
+                      <template slot="content" name="self">
+                        <b class="username-self">{{PrivateChat.username}}</b>
+                      </template>
+                      <template slot="content" name="other">
+                        <b class="username-other">{{PrivateChat.username}}</b>
+                      </template>
+                      <div slot="viewport"></div>
+                    </switch-group>
+
+                  </div>
+                  <div class="chat-message">{{PrivateChat.message}}</div>
+                  <div class="chat-created-at">{{date(PrivateChat.createdAt)}}</div>
+                </div>
+              </template>
+              <template slot="loader">
+                <div class="loading-spinner-container">
+                  <div class="spinning">&#8635;</div>
+                </div>
+              </template>
+              <div slot="viewport" class="chat-viewport"></div>
+
+            </collection-browser>
+
+            <collection-adder
+              class="chat-adder-form"
+              collection-type="PrivateChat"
+              collection-fields="message:textarea"
+              model-values="username={{socket.authToken.username}},participants='{{[socket.authToken.username, username].sort().join(',')}}'"
               submit-button-label="Send"
             ></collection-adder>
           </template>

@@ -164,12 +164,12 @@ capitalisk-passphrase-input {
   padding: 10px;
 }
 
-.chat-wallet-address {
+.chat-username {
   display: flex;
   justify-content: flex-end;
 }
 
-.wallet-address-self {
+.username-self {
   color: #009900;
 }
 
@@ -202,10 +202,46 @@ input[type=submit]:not(input[disabled]) {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.limited-width-container {
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.small-line-container {
+  display: inline-block;
+  vertical-align: bottom;
+  max-width: 150px;
+  width: 100%;
+}
+
+.medium-line-container {
+  display: inline-block;
+  vertical-align: bottom;
+  max-width: 350px;
+  width: 100%;
+}
+
+.small-padded-container {
+  padding: 5px;
+}
+
+@media (max-width: 800px) {
+  .chat-top-row {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .sm-full-width-line {
+    width: 100%;
+  }
 }
 
 @media (max-width: 550px) {
-  .chat-wallet-address {
+  .chat-username {
     font-size: 13px;
   }
   .chat-created-at {

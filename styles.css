@@ -133,18 +133,6 @@ capitalisk-passphrase-input {
   box-sizing: border-box;
 }
 
-.loading-spinner-container-short {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100px;
-  margin-top: 20px;
-  margin-bottom: 30px;
-  color: #cccccc;
-  font-size: 70px;
-  box-sizing: border-box;
-}
-
 .multisig-indicator.error {
   color: #ff0000;
 }
@@ -173,7 +161,7 @@ capitalisk-passphrase-input {
   gap: 15px;
   margin-top: 20px;
   margin-bottom: 30px;
-  max-height: 450px;
+  height: 450px;
   overflow-y: auto;
   box-sizing: border-box;
 }

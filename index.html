@@ -74,14 +74,15 @@
 
           <template slot="page" route-path="/chat" no-auth-redirect="/log-in/sas">
             <div class="chat-top-row">
-              <h1 class="sm-full-width-line">Saasufy General Chat</h1>
+              <h1 class="sm-full-width-line page-title">Saasufy General Chat</h1>
+              <a class="limited-width-container small-padded-container" href="#/chat/private">All Private Chats</a>
               <log-out onclick="logOut()"><a class="limited-width-container small-padded-container" href="javascript:void(0)">Log out</a></log-out>
             </div>
 
             <collection-browser
               class="chat-browser"
               collection-type="PublicChat"
-              collection-fields="username,message,createdAt"
+              collection-fields="sender,message,createdAt"
               collection-view="recentView"
               collection-page-size="50"
               collection-view-params=""
@@ -90,13 +91,13 @@
                 <div class="chat-message-container">
                   <div class="chat-username">
 
-                    <switch-group show-cases="self={{socket.authToken.username === PublicChat.username}},other={{socket.authToken.username !== PublicChat.username}}">
+                    <switch-group show-cases="self={{socket.authToken.username === PublicChat.sender}},other={{socket.authToken.username !== PublicChat.sender}}">
                       <template slot="content" name="self">
-                        <b class="username-self">{{PublicChat.username}}</b>
+                        <b class="username-self">{{PublicChat.sender}}</b>
                       </template>
                       <template slot="content" name="other">
-                        <a href="#/chat/{{PublicChat.username}}">
-                          <b class="username-other">{{PublicChat.username}}</b>
+                        <a href="#/chat/private/{{PublicChat.sender}}">
+                          <b class="username-other">{{PublicChat.sender}}</b>
                         </a>
                       </template>
                       <div slot="viewport"></div>
@@ -120,36 +121,109 @@
               class="chat-adder-form"
               collection-type="PublicChat"
               collection-fields="message:textarea"
-              model-values="username={{socket.authToken.username}}"
+              model-values="sender={{socket.authToken.username}}"
               submit-button-label="Send"
             ></collection-adder>
           </template>
 
-          <template slot="page" route-path="/chat/:username" no-auth-redirect="/log-in/sas">
+          <template slot="page" route-path="/chat/private" no-auth-redirect="/log-in/sas">
             <div class="chat-top-row">
-              <h1 class="sm-full-width-line">Saasufy <div class="medium-line-container limited-width-container">{{username}}</div>Chat</h1>
+              <h1 class="sm-full-width-line page-title">Saasufy Private Chats</h1>
               <a class="limited-width-container small-padded-container" href="#/chat">General Chat</a>
+              <log-out onclick="logOut()"><a class="limited-width-container small-padded-container" href="javascript:void(0)">Log out</a></log-out>
+            </div>
+
+            <h3 class="sm-full-width-line">Recently received</h3>
+            <collection-browser
+              class="chat-browser"
+              collection-type="PrivateChat"
+              collection-fields="sender,message,createdAt"
+              collection-view="recentlyReceivedView"
+              collection-page-size="5"
+              collection-view-params="receiver={{socket.authToken.username}}"
+            >
+              <template slot="item">
+                <div class="chat-message-container">
+                  <div class="chat-username">
+                    <a href="#/chat/private/{{PrivateChat.sender}}">
+                      <b class="username-other">{{PrivateChat.sender}}</b>
+                    </a>
+                  </div>
+                  <div class="chat-message">{{PrivateChat.message}}</div>
+                  <div class="chat-created-at">{{date(PrivateChat.createdAt)}}</div>
+                </div>
+              </template>
+              <template slot="loader">
+                <div class="loading-spinner-container-short">
+                  <div class="spinning">&#8635;</div>
+                </div>
+              </template>
+              <div slot="viewport" class="chat-received-viewport"></div>
+              <button slot="previous-page">&lt;</button>
+              <span slot="page-number"></span>
+              <button slot="next-page">&gt;</button>
+            </collection-browser>
+
+            <div class="spacer"></div>
+
+            <h3 class="sm-full-width-line">Recently sent</h3>
+            <collection-browser
+              class="chat-browser"
+              collection-type="PrivateChat"
+              collection-fields="receiver,message,createdAt"
+              collection-view="recentlySentView"
+              collection-page-size="5"
+              collection-view-params="sender={{socket.authToken.username}}"
+            >
+              <template slot="item">
+                <div class="chat-message-container">
+                  <div class="chat-username">
+                    <a href="#/chat/private/{{PrivateChat.receiver}}">
+                      <b class="username-other">{{PrivateChat.receiver}}</b>
+                    </a>
+                  </div>
+                  <div class="chat-message">{{PrivateChat.message}}</div>
+                  <div class="chat-created-at">{{date(PrivateChat.createdAt)}}</div>
+                </div>
+              </template>
+              <template slot="loader">
+                <div class="loading-spinner-container-short">
+                  <div class="spinning">&#8635;</div>
+                </div>
+              </template>
+              <div slot="viewport" class="chat-sent-viewport"></div>
+              <button slot="previous-page">&lt;</button>
+              <span slot="page-number"></span>
+              <button slot="next-page">&gt;</button>
+            </collection-browser>
+
+          </template>
+
+          <template slot="page" route-path="/chat/private/:username" no-auth-redirect="/log-in/sas">
+            <div class="chat-top-row">
+              <h1 class="sm-full-width-line page-title">Saasufy <div class="medium-line-container limited-width-container">{{username}}</div>Chat</h1>
+              <a class="limited-width-container small-padded-container" href="#/chat/private">All Private Chats</a>
               <log-out onclick="logOut()"><a class="limited-width-container small-padded-container" href="javascript:void(0)">Log out</a></log-out>
             </div>
 
             <collection-browser
               class="chat-browser"
               collection-type="PrivateChat"
-              collection-fields="username,message,createdAt"
+              collection-fields="sender,message,createdAt"
               collection-view="recentView"
-              collection-page-size="50"
+              collection-page-size="5"
               collection-view-params="participants='{{[socket.authToken.username, username].sort().join(',')}}'"
             >
               <template slot="item">
                 <div class="chat-message-container">
                   <div class="chat-username">
 
-                    <switch-group show-cases="self={{socket.authToken.username === PrivateChat.username}},other={{socket.authToken.username !== PrivateChat.username}}">
+                    <switch-group show-cases="self={{socket.authToken.username === PrivateChat.sender}},other={{socket.authToken.username !== PrivateChat.sender}}">
                       <template slot="content" name="self">
-                        <b class="username-self">{{PrivateChat.username}}</b>
+                        <b class="username-self">{{PrivateChat.sender}}</b>
                       </template>
                       <template slot="content" name="other">
-                        <b class="username-other">{{PrivateChat.username}}</b>
+                        <b class="username-other">{{PrivateChat.sender}}</b>
                       </template>
                       <div slot="viewport"></div>
                     </switch-group>
@@ -172,7 +246,7 @@
               class="chat-adder-form"
               collection-type="PrivateChat"
               collection-fields="message:textarea"
-              model-values="username={{socket.authToken.username}},participants='{{[socket.authToken.username, username].sort().join(',')}}'"
+              model-values="sender={{socket.authToken.username}},receiver={{username}},participants='{{[socket.authToken.username, username].sort().join(',')}}'"
               submit-button-label="Send"
             ></collection-adder>
           </template>

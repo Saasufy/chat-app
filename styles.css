@@ -133,6 +133,18 @@ capitalisk-passphrase-input {
   box-sizing: border-box;
 }
 
+.loading-spinner-container-short {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  color: #cccccc;
+  font-size: 70px;
+  box-sizing: border-box;
+}
+
 .multisig-indicator.error {
   color: #ff0000;
 }
@@ -152,6 +164,17 @@ capitalisk-passphrase-input {
   height: 450px;
   overflow-y: scroll;
   padding-right: 20px;
+  box-sizing: border-box;
+}
+
+.chat-sent-viewport,.chat-received-viewport {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  max-height: 450px;
+  overflow-y: auto;
   box-sizing: border-box;
 }
 
@@ -203,7 +226,7 @@ input[type=submit]:not(input[disabled]) {
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
-  padding: 10px;
+  padding: 10px 0 10px 0;
 }
 
 .limited-width-container {
@@ -227,7 +250,15 @@ input[type=submit]:not(input[disabled]) {
 }
 
 .small-padded-container {
-  padding: 5px;
+  padding: 10px;
+}
+
+.page-title {
+  flex-grow: 1;
+}
+
+.spacer {
+  height: 30px;
 }
 
 @media (max-width: 800px) {

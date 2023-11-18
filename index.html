@@ -139,7 +139,7 @@
               collection-type="PrivateChat"
               collection-fields="sender,message,createdAt"
               collection-view="recentlyReceivedView"
-              collection-page-size="5"
+              collection-page-size="4"
               collection-view-params="receiver={{socket.authToken.username}}"
             >
               <template slot="item">
@@ -172,7 +172,7 @@
               collection-type="PrivateChat"
               collection-fields="receiver,message,createdAt"
               collection-view="recentlySentView"
-              collection-page-size="5"
+              collection-page-size="4"
               collection-view-params="sender={{socket.authToken.username}}"
             >
               <template slot="item">
@@ -211,7 +211,7 @@
               collection-type="PrivateChat"
               collection-fields="sender,message,createdAt"
               collection-view="recentView"
-              collection-page-size="5"
+              collection-page-size="50"
               collection-view-params="participants='{{[socket.authToken.username, username].sort().join(',')}}'"
             >
               <template slot="item">

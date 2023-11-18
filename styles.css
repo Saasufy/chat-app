@@ -178,10 +178,35 @@ capitalisk-passphrase-input {
 .chat-username {
   display: flex;
   justify-content: flex-end;
+  max-width: 100%;
+}
+
+.chat-username > a {
+  display: flex;
+  max-width: 100%;
+}
+
+.chat-username switch-group {
+  max-width: 100%;
+}
+
+.chat-username switch-group [slot=viewport] {
+  display: flex;
+}
+
+.chat-username switch-group [slot=viewport] > a {
+  display: flex;
+  max-width: 100%;
 }
 
 .username-self {
   color: #009900;
+}
+
+.username-self,.username-other {
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .chat-created-at {
@@ -234,7 +259,6 @@ input[type=submit]:not(input[disabled]) {
   display: inline-block;
   vertical-align: bottom;
   max-width: 350px;
-  width: 100%;
 }
 
 .small-padded-container {
@@ -242,6 +266,7 @@ input[type=submit]:not(input[disabled]) {
 }
 
 .page-title {
+  display: flex;
   flex-grow: 1;
 }
 

@@ -249,6 +249,16 @@ input[type=submit]:not(input[disabled]) {
   height: 30px;
 }
 
+[slot=page-number] {
+  display: inline-block;
+  text-align: center;
+  min-width: 30px;
+}
+
+[slot=next-page],[slot=previous-page] {
+  cursor: pointer;
+}
+
 @media (max-width: 800px) {
   .chat-top-row {
     flex-direction: column;

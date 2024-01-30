@@ -1,2 +1,2 @@
 # chat-app
-A chat app built with Saasufy.
+A chat demo app built with Saasufy.

@@ -12,7 +12,7 @@
     <script src="https://saasufy.com/node_modules/saasufy-components/socket.js" type="module" defer></script>
     <script src="https://saasufy.com/node_modules/saasufy-components/app-router.js" type="module" defer></script>
     <script src="https://saasufy.com/node_modules/saasufy-components/log-in-form.js" type="module" defer></script>
-    <script src="https://saasufy.com/node_modules/saasufy-components/collection-browser.js" type="module" defer></script>
+    <script src="https://saasufy.com/node_modules/saasufy-components/collection-viewer.js" type="module" defer></script>
     <script src="https://saasufy.com/node_modules/saasufy-components/collection-adder.js" type="module" defer></script>
     <script src="https://saasufy.com/node_modules/saasufy-components/switch-group.js" type="module" defer></script>
     <script src="https://saasufy.com/node_modules/saasufy-components/log-out.js" type="module" defer></script>
@@ -79,8 +79,8 @@
               <log-out onclick="logOut()"><a class="limited-width-container small-padded-container" href="javascript:void(0)">Log out</a></log-out>
             </div>
 
-            <collection-browser
-              class="chat-browser"
+            <collection-viewer
+              class="chat-viewer"
               collection-type="PublicChat"
               collection-fields="sender,message,createdAt"
               collection-view="recentView"
@@ -115,7 +115,7 @@
               </template>
               <div slot="viewport" class="chat-viewport"></div>
 
-            </collection-browser>
+            </collection-viewer>
 
             <collection-adder
               class="chat-adder-form"
@@ -134,8 +134,8 @@
             </div>
 
             <h3 class="sm-full-width-line">Recently received</h3>
-            <collection-browser
-              class="chat-browser"
+            <collection-viewer
+              class="chat-viewer"
               collection-type="PrivateChat"
               collection-fields="sender,message,createdAt"
               collection-view="recentlyReceivedView"
@@ -162,13 +162,13 @@
               <button slot="previous-page">&lt;</button>
               <span slot="page-number"></span>
               <button slot="next-page">&gt;</button>
-            </collection-browser>
+            </collection-viewer>
 
             <div class="spacer"></div>
 
             <h3 class="sm-full-width-line">Recently sent</h3>
-            <collection-browser
-              class="chat-browser"
+            <collection-viewer
+              class="chat-viewer"
               collection-type="PrivateChat"
               collection-fields="receiver,message,createdAt"
               collection-view="recentlySentView"
@@ -195,7 +195,7 @@
               <button slot="previous-page">&lt;</button>
               <span slot="page-number"></span>
               <button slot="next-page">&gt;</button>
-            </collection-browser>
+            </collection-viewer>
 
           </template>
 
@@ -206,8 +206,8 @@
               <log-out onclick="logOut()"><a class="limited-width-container small-padded-container" href="javascript:void(0)">Log out</a></log-out>
             </div>
 
-            <collection-browser
-              class="chat-browser"
+            <collection-viewer
+              class="chat-viewer"
               collection-type="PrivateChat"
               collection-fields="sender,message,createdAt"
               collection-view="recentView"
@@ -240,7 +240,7 @@
               </template>
               <div slot="viewport" class="chat-viewport"></div>
 
-            </collection-browser>
+            </collection-viewer>
 
             <collection-adder
               class="chat-adder-form"

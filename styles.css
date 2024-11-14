@@ -71,7 +71,7 @@ input[type=text].success:focus,input[type=password].success:focus,input[type=num
   outline-color: #009900;
 }
 
-input[type=text],input[type=password],input[type=button],input[type=submit],input[type=number],textarea {
+input[type=text],input[type=password],input[type=button],input[type=submit],input[type=number],textarea,button {
   padding: 10px;
   font-size: 18px;
   max-width: 400px;
@@ -143,9 +143,17 @@ capitalisk-passphrase-input {
   }
 }
 
+.chat-viewer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
 .chat-viewport {
   display: flex;
   flex-direction: column-reverse;
+  width: 100%;
   gap: 15px;
   margin-top: 20px;
   margin-bottom: 30px;
@@ -158,6 +166,7 @@ capitalisk-passphrase-input {
 .chat-sent-viewport,.chat-received-viewport {
   display: flex;
   flex-direction: column;
+  width: 100%;
   gap: 15px;
   margin-top: 20px;
   margin-bottom: 30px;
